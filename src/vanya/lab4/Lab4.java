@@ -35,7 +35,8 @@ public class Lab4 extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        setSize(600, 500);
+        setSize(600, 550);
+        actionJL.setForeground(Color.RED);
 
         List<Mammal> addUser = new ArrayList<>();
 
@@ -44,6 +45,9 @@ public class Lab4 extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 addUser.add(new Mammal(name.getText(), family.getText(), Float.parseFloat(maxSpeed.getText())));
                 textArea1.append(addUser.get(addUser.size() - 1) + "\n");
+                butJL.setText("Добавление в массив");
+                actionJL.setText("Обьект добавлен");
+                actionJL.setForeground(Color.GREEN);
             }
         });
         saveBut.addActionListener(new ActionListener() {
@@ -90,12 +94,11 @@ public class Lab4 extends JFrame {
                     butJl2.setText("maxSpeed от " +x1+"\n(включительно) до " + x2+"(включительно).");
 
                     List<Mammal> read = readFile(fileName);
-                    int sizeRead=read.size();
-
                     List<Mammal> res =read.stream().
                             filter(el->el.getMaxSpeed()>=x1&&el.getMaxSpeed()<=x2).toList();
                     int sizeRes=res.size();
-                    if (sizeRes!=sizeRes){
+
+                    if (sizeRes>0){
                         res.stream().forEach(el->textArea2.append(el+"\n"));
                         actionJL2.setText("Согласно условию");
                         actionJL2.setForeground(Color.GREEN);
